@@ -1,0 +1,60 @@
+
+office_directory = { human_resource: 120,
+product_development: 123,
+marketing: 145,
+sales: 133,
+technology: 122}
+
+office_directory.each do |department, ext|
+ puts "#{department} Ext.#{ext}"
+end
+
+puts "Please type one of the following options: "
+puts "--UPDATE"
+puts "--DELETE"
+puts "--ADD"
+
+choice = gets.chomp
+
+case choice
+  when "update"
+    puts "Please enter the department you wish to update: "
+    department = gets.chomp
+
+    if office_directory[department.to_sym] == nil
+      puts "Department not found"
+    else
+      puts "Please enter a new extension number: "
+      extension = gets.chomp.to_i
+
+      office_directory[department] = extension
+
+      puts "Update Successful"
+    end
+
+  when "add"
+    puts "Please enter a new department: "
+    department = gets.chomp
+
+    puts "Please enter an extension for the department: "
+    extension = gets.chomp.to_i
+
+    office_directory[department] = extension
+
+    puts "Department with extension added complete"
+
+  when "delete"
+    puts"Please enter the department you wish to delete: "
+    department = gets.chomp
+
+    if office_directory[department.to_sym] == nil
+      puts "Department not found"
+    else
+    office_directory.delete(department)
+
+      puts "Department successfully deleted"
+    end
+
+  else
+    puts "Error: I do not know that command"
+end
