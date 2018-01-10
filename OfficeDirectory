@@ -19,7 +19,7 @@ choice = gets.chomp
 case choice
   when "update"
     puts "Please enter the department you wish to update: "
-    department = gets.chomp
+    department = gets.chomp.to_sym
 
     if office_directory[department.to_sym] == nil
       puts "Department not found"
@@ -30,11 +30,15 @@ case choice
       office_directory[department] = extension
 
       puts "Update Successful"
+
+      office_directory.each do |dpt, ext|
+        puts "#{dpt} Ext.#{ext}"
+      end
     end
 
   when "add"
     puts "Please enter a new department: "
-    department = gets.chomp
+    department = gets.chomp.to_sym
 
     puts "Please enter an extension for the department: "
     extension = gets.chomp.to_i
@@ -43,16 +47,24 @@ case choice
 
     puts "Department with extension added complete"
 
+    office_directory.each do |dpt, ext|
+      puts "#{dpt} Ext.#{ext}"
+    end
+
   when "delete"
     puts"Please enter the department you wish to delete: "
-    department = gets.chomp
+    department = gets.chomp.to_sym
 
     if office_directory[department.to_sym] == nil
       puts "Department not found"
     else
     office_directory.delete(department)
 
-      puts "Department successfully deleted"
+    puts "Department successfully deleted"
+
+    office_directory.each do |dpt, ext|
+      puts "#{dpt} Ext.#{ext}"
+      end
     end
 
   else
